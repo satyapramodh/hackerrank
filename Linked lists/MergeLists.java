@@ -11,22 +11,23 @@
 Node mergeLists(Node headA, Node headB) {
      // This is a "method-only" submission.
      // You only need to complete this method
-  Node currentA, currentB;
-  currentA = headA;
-  currentB = headB;
-  if(currentA == null){
+  // if one of them is empty
+  if(headA == null){
     return headB;
   }
-  if(currentB == null){
+  if(headB == null){
     return headA;
   }
 
-  // while(currentA != null || currentB != null){
-  //   if(currentA.data > currentB.data){
-  //     Node temp = new Node();
-  //     temp.data = currentB.data;
-  //   }
-  // }
+  Node tempHead = new Node();
 
-  return headA;
+  if(headA.data > headB.data){
+    tempHead.data = headB.data;
+    tempHead.next = mergeLists(headA, headB.next);
+  } else {
+    tempHead.data = headA.data;
+    tempHead.next = mergeLists(headA.next, headB);
+  }
+
+  return tempHead;
 }
